@@ -33,7 +33,7 @@ function App() {
             onClick={onClickCallback}
         />
         <UncotrolledAccordion titleValue={"uncotrolled accordion 1"}/>
-        <UncotrolledAccordion titleValue={"uncotrolled accordion 1"}/>
+        <UncotrolledAccordion titleValue={"uncotrolled with reducer"}/>
 
 
         <UncontrolledRating />

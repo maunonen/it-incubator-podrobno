@@ -4,9 +4,9 @@ function UncotrolledAccordionBody ( props:any ) {
     return (
         <div>
             <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li>1 reducer</li>
+                <li>2 reducer</li>
+                <li>3 reducer</li>
             </ul>
 
         </div>
