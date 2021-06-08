@@ -1,22 +1,15 @@
 import React, {useMemo, useState} from 'react'
 
 export default {
-    title: 'Recat.memo demo',
+    title: 'UseMemo demo',
 }
 
-const NewMessagesCounter = (props: { count: number }) => {
-    return (
-        <div>
-            {props.count}
-        </div>
-    )
-}
 
 export type UserType = {
     users: Array<string>
 }
 const UserSecret = (props: UserType) => {
-    console.log("Users")
+    console.log("Users secret")
     return (
         <div>
             {
@@ -28,21 +21,20 @@ const UserSecret = (props: UserType) => {
 
 const Users = React.memo(UserSecret)
 
-export const Example = () => {
+export const HelpsToReactMemo = () => {
     console.log("example")
     const [counter, setCounter] = useState(0)
     const [users, setUsers] = useState(["ALex", "Jenny", "Jari"])
-    const addUser = () => {
-        const newUser = [...users, 'Sveta' + new Date().getTime()]
-        /*users.push('Sveta' + new Date().getTime())*/
-        setUsers(newUser)
-    }
+
+    const newAarray = useMemo(() =>{
+        return users.filter( u => u.toLowerCase().indexOf("a"))
+    }, [users])
+
     return (
         <>
             <button onClick={() => setCounter(counter + 1)}>+</button>
-            <button onClick={addUser}>Add User</button>
-            <NewMessagesCounter count={counter}/>
-            <Users users={users}/>
+            { counter }
+            <Users users={ newAarray }/>
         </>
     )
 }
@@ -91,21 +83,22 @@ export const DifficultCounting = () => {
 
 }
 
-export const LikeUseCallback = () => {
+
+export const LikeUseCallBack = () => {
     console.log("example")
     const [counter, setCounter] = useState(0)
     const [users, setUsers] = useState(["ALex", "Jenny", "Jari"])
-    const addUser = () => {
-        const newUser = [...users, 'Sveta' + new Date().getTime()]
-        /*users.push('Sveta' + new Date().getTime())*/
-        setUsers(newUser)
-    }
+
+    const newAarray = useMemo(() =>{
+        return users.filter( u => u.toLowerCase().indexOf("a"))
+    }, [users])
+
     return (
         <>
             <button onClick={() => setCounter(counter + 1)}>+</button>
-            <button onClick={addUser}>Add User</button>
-            <NewMessagesCounter count={counter}/>
-            <Users users={users}/>
+            { counter }
+            <Users users={ newAarray }/>
         </>
     )
 }
+
