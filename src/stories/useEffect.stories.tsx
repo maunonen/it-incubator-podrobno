@@ -5,13 +5,15 @@ export default {
 }
 
 
+
+
 export const SimpleExample = () => {
     console.log("Use Effect example")
     const [counter, setCounter] = useState(0)
     const [fake, setFake] = useState(1)
 
-    const changer = ( state : number ) => {
-        return state  + 1
+    const changer = (state: number) => {
+        return state + 1
     }
 
     /*useEffect(() => {
@@ -32,12 +34,41 @@ export const SimpleExample = () => {
     }, [counter])
 
 
+    return (
+        <>
+            <button onClick={() => setCounter(counter + 1)}>conuter +</button>
+            <button onClick={() => setFake(fake + 1)}>fake +</button>
+            {counter}
+        </>
+    )
+}
+
+
+export const SetTimeOutExample = () => {
+
+    const [counter, setCounter] = useState(0)
+    const [fake, setFake] = useState(1)
+
+    console.log("Use Effect example")
+
+
+
+    useEffect(() => {
+        //console.log("useEffect every render")
+        /*setTimeout(() => {
+            document.title = counter.toString()
+        }, 1000)*/
+
+        setInterval(() => {
+            setCounter((state) => { return state + 1})
+        }, 1000)
+    }, [])
 
     return (
         <>
             <button onClick={() => setCounter(counter + 1)}>conuter +</button>
             <button onClick={() => setFake(fake + 1)}>fake +</button>
-            { counter }
+            {counter}
         </>
     )
 }
