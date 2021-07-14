@@ -5,8 +5,6 @@ export default {
 }
 
 
-
-
 export const SimpleExample = () => {
     console.log("Use Effect example")
     const [counter, setCounter] = useState(0)
@@ -51,17 +49,20 @@ export const SetTimeOutExample = () => {
 
     console.log("Use Effect example")
 
-
-
     useEffect(() => {
         //console.log("useEffect every render")
         /*setTimeout(() => {
             document.title = counter.toString()
         }, 1000)*/
 
-        setInterval(() => {
-            setCounter((state) => { return state + 1})
+        const intervalId = setInterval(() => {
+            setCounter((state) => {
+                return state + 1
+            })
         }, 1000)
+        return () => {
+            clearInterval(intervalId)
+        }
     }, [])
 
     return (
@@ -69,6 +70,52 @@ export const SetTimeOutExample = () => {
             <button onClick={() => setCounter(counter + 1)}>conuter +</button>
             <button onClick={() => setFake(fake + 1)}>fake +</button>
             {counter}
+        </>
+    )
+}
+
+export const ResetEffectExample = () => {
+
+    const [counter, setCounter] = useState(0)
+    console.log("Component rendered")
+
+    useEffect(() => {
+        console.log("Effect occured ")
+        return () => {
+            console.log("Reset effect")
+        }
+    }, [counter])
+
+    return (
+        <>
+            Hello counter {counter}
+            <button
+                onClick={() => {setCounter(counter + 1)}}>+
+            </button>
+        </>
+    )
+}
+
+export const KeyTrackerExample = () => {
+
+    const [text, setText] = useState('')
+    console.log("Component rendered", text)
+
+    useEffect(() => {
+        const handler = (e : KeyboardEvent ) => {
+            console.log("", e.key)
+            setText( state => state + e.key)
+        }
+        window.document.addEventListener("keypress",handler )
+        return () => {
+            console.log("Effect cleaned")
+            window.document.removeEventListener("keypress", handler)
+        }
+    }, [])
+
+    return (
+        <>
+            Hello counter {text}
         </>
     )
 }
